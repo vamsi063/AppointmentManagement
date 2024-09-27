@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Domain.Patient>
+@{
+    ViewBag.Title = "Patients";
+}
+
+<div class="col-md-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h3>Patients </h3>
+            <div class="clearfix"></div>
+        </div>
+        <a href="@Url.Action("Create","Patient")" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>Add Patient</a>
+        <div class="x_content">
+            <table id="patients" class=" data table table-striped no-margin">
+                <thead>
+                    <tr>
+                        <th>Patient name</th>
+                        <th>Token</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Token</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Address</td>
+                            <td><a href="@Url.Action("Details","Patient", new { id = item.Id})" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>View</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#patients').DataTable();
+        });
+    </script>
+}
